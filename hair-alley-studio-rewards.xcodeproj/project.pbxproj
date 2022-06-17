@@ -13,6 +13,7 @@
 		9572F313285D173B00D66E44 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9572F312285D173B00D66E44 /* Preview Assets.xcassets */; };
 		9572F315285D173B00D66E44 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572F314285D173B00D66E44 /* Persistence.swift */; };
 		9572F318285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9572F316285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodeld */; };
+		9572F320285D195C00D66E44 /* AddNewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572F31F285D195C00D66E44 /* AddNewListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		9572F314285D173B00D66E44 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		9572F317285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = hair_alley_studio_rewards.xcdatamodel; sourceTree = "<group>"; };
 		9572F319285D173B00D66E44 /* hair_alley_studio_rewards.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = hair_alley_studio_rewards.entitlements; sourceTree = "<group>"; };
+		9572F31F285D195C00D66E44 /* AddNewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				9572F319285D173B00D66E44 /* hair_alley_studio_rewards.entitlements */,
 				9572F316285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodeld */,
 				9572F311285D173B00D66E44 /* Preview Content */,
+				9572F31F285D195C00D66E44 /* AddNewListView.swift */,
 			);
 			path = "hair-alley-studio-rewards";
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 			files = (
 				9572F315285D173B00D66E44 /* Persistence.swift in Sources */,
 				9572F30E285D173900D66E44 /* ContentView.swift in Sources */,
+				9572F320285D195C00D66E44 /* AddNewListView.swift in Sources */,
 				9572F318285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodeld in Sources */,
 				9572F30C285D173900D66E44 /* hair_alley_studio_rewardsApp.swift in Sources */,
 			);

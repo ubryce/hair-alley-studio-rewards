@@ -10,6 +10,8 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    
+    @State private var isPresented: Bool = false
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
@@ -34,6 +36,11 @@ struct ContentView: View {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
+            }.sheet(isPresented: $isPresented, onDismiss: {}) {
+                AddNewListView { newListName, newListNum in
+                    // saving new list
+                }.frame(width: 600, height: 400)
+                    .foregroundColor(.black)
             }
             Text("Select an item")
         }
@@ -41,8 +48,9 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            //let newItem = Item(context: viewContext)
+            //newItem.timestamp = Date()
+            isPresented = true
 
             do {
                 try viewContext.save()
