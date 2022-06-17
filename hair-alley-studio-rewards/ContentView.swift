@@ -38,18 +38,10 @@ struct ContentView: View {
                     Button(action: addItem) {
                         Label("Add Item", systemImage: "plus")
                     }
-                    Button(action: findItem) {
-                        Label("Find Item", systemImage: "magnifyingglass")
-                    }
                     TextField("Search for user", text: $query)
+                        .textFieldStyle(.roundedBorder)
                 }
             }.sheet(isPresented: $isPresented, onDismiss: {}) {
-                AddNewListView { newListName, newListNum in
-                    // saving new list
-                }.frame(width: 600, height: 400)
-                    .foregroundColor(.black)
-            }
-            .sheet(isPresented: $isFindPresented, onDismiss: {}) {
                 AddNewListView { newListName, newListNum in
                     // saving new list
                 }.frame(width: 600, height: 400)
@@ -73,13 +65,6 @@ struct ContentView: View {
             //let newItem = Item(context: viewContext)
             //newItem.timestamp = Date()
             isPresented = true
-        }
-    }
-    
-    private func findItem() {
-        withAnimation {
-            isFindPresented = true
-            
         }
     }
 
