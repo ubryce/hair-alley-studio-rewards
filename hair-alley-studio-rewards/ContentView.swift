@@ -11,9 +11,12 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State private var isPresented: Bool = false
+    @State private var isFindPresented: Bool = false
+    @State private var query = ""
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        //predicate: NSPredicate(format: "name == %@", "bryce"),
         animation: .default)
     private var items: FetchedResults<Item>
 
@@ -25,16 +28,20 @@ struct ContentView: View {
                         Text("Item at \(item.timestamp!, formatter: itemFormatter)")
                         Text("name \(item.name ?? "")")
                     } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                        Text("name \(item.name ?? "")")
                     }
                 }
                 .onDelete(perform: deleteItems)
-            }
+            }.onDeleteCommand(perform: {print("delete")})
             .toolbar {
-                ToolbarItem {
+                ToolbarItemGroup {
                     Button(action: addItem) {
                         Label("Add Item", systemImage: "plus")
                     }
+                    Button(action: findItem) {
+                        Label("Find Item", systemImage: "magnifyingglass")
+                    }
+                    TextField("Search for user", text: $query)
                 }
             }.sheet(isPresented: $isPresented, onDismiss: {}) {
                 AddNewListView { newListName, newListNum in
@@ -42,8 +49,23 @@ struct ContentView: View {
                 }.frame(width: 600, height: 400)
                     .foregroundColor(.black)
             }
+            .sheet(isPresented: $isFindPresented, onDismiss: {}) {
+                AddNewListView { newListName, newListNum in
+                    // saving new list
+                }.frame(width: 600, height: 400)
+                    .foregroundColor(.black)
+            }
             Text("Select an item")
-        }
+        }.searchable(text: $query)
+            .onChange(of: query) { newValue in
+                items.nsPredicate = searchPredicate(query: newValue)
+            }
+    }
+    
+    private func searchPredicate(query: String) -> NSPredicate? {
+        if query.isEmpty {return nil}
+        return NSPredicate(format: "%K BEGINSWITH[cd] %@",
+                           #keyPath(Item.name),query)
     }
 
     private func addItem() {
@@ -51,6 +73,13 @@ struct ContentView: View {
             //let newItem = Item(context: viewContext)
             //newItem.timestamp = Date()
             isPresented = true
+        }
+    }
+    
+    private func findItem() {
+        withAnimation {
+            isFindPresented = true
+            
         }
     }
 
