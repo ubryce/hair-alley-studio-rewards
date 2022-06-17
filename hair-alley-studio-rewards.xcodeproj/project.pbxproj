@@ -1,0 +1,362 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9572F30C285D173900D66E44 /* hair_alley_studio_rewardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572F30B285D173900D66E44 /* hair_alley_studio_rewardsApp.swift */; };
+		9572F30E285D173900D66E44 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572F30D285D173900D66E44 /* ContentView.swift */; };
+		9572F310285D173B00D66E44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9572F30F285D173B00D66E44 /* Assets.xcassets */; };
+		9572F313285D173B00D66E44 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9572F312285D173B00D66E44 /* Preview Assets.xcassets */; };
+		9572F315285D173B00D66E44 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572F314285D173B00D66E44 /* Persistence.swift */; };
+		9572F318285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9572F316285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9572F308285D173900D66E44 /* hair-alley-studio-rewards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hair-alley-studio-rewards.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9572F30B285D173900D66E44 /* hair_alley_studio_rewardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hair_alley_studio_rewardsApp.swift; sourceTree = "<group>"; };
+		9572F30D285D173900D66E44 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9572F30F285D173B00D66E44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9572F312285D173B00D66E44 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9572F314285D173B00D66E44 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		9572F317285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = hair_alley_studio_rewards.xcdatamodel; sourceTree = "<group>"; };
+		9572F319285D173B00D66E44 /* hair_alley_studio_rewards.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = hair_alley_studio_rewards.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9572F305285D173900D66E44 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9572F2FF285D173900D66E44 = {
+			isa = PBXGroup;
+			children = (
+				9572F30A285D173900D66E44 /* hair-alley-studio-rewards */,
+				9572F309285D173900D66E44 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9572F309285D173900D66E44 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9572F308285D173900D66E44 /* hair-alley-studio-rewards.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9572F30A285D173900D66E44 /* hair-alley-studio-rewards */ = {
+			isa = PBXGroup;
+			children = (
+				9572F30B285D173900D66E44 /* hair_alley_studio_rewardsApp.swift */,
+				9572F30D285D173900D66E44 /* ContentView.swift */,
+				9572F30F285D173B00D66E44 /* Assets.xcassets */,
+				9572F314285D173B00D66E44 /* Persistence.swift */,
+				9572F319285D173B00D66E44 /* hair_alley_studio_rewards.entitlements */,
+				9572F316285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodeld */,
+				9572F311285D173B00D66E44 /* Preview Content */,
+			);
+			path = "hair-alley-studio-rewards";
+			sourceTree = "<group>";
+		};
+		9572F311285D173B00D66E44 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				9572F312285D173B00D66E44 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9572F307285D173900D66E44 /* hair-alley-studio-rewards */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9572F31C285D173B00D66E44 /* Build configuration list for PBXNativeTarget "hair-alley-studio-rewards" */;
+			buildPhases = (
+				9572F304285D173900D66E44 /* Sources */,
+				9572F305285D173900D66E44 /* Frameworks */,
+				9572F306285D173900D66E44 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "hair-alley-studio-rewards";
+			productName = "hair-alley-studio-rewards";
+			productReference = 9572F308285D173900D66E44 /* hair-alley-studio-rewards.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9572F300285D173900D66E44 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					9572F307285D173900D66E44 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 9572F303285D173900D66E44 /* Build configuration list for PBXProject "hair-alley-studio-rewards" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9572F2FF285D173900D66E44;
+			productRefGroup = 9572F309285D173900D66E44 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9572F307285D173900D66E44 /* hair-alley-studio-rewards */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9572F306285D173900D66E44 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9572F313285D173B00D66E44 /* Preview Assets.xcassets in Resources */,
+				9572F310285D173B00D66E44 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9572F304285D173900D66E44 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9572F315285D173B00D66E44 /* Persistence.swift in Sources */,
+				9572F30E285D173900D66E44 /* ContentView.swift in Sources */,
+				9572F318285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodeld in Sources */,
+				9572F30C285D173900D66E44 /* hair_alley_studio_rewardsApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9572F31A285D173B00D66E44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9572F31B285D173B00D66E44 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		9572F31D285D173B00D66E44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "hair-alley-studio-rewards/hair_alley_studio_rewards.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"hair-alley-studio-rewards/Preview Content\"";
+				DEVELOPMENT_TEAM = 86HGZBA3AA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hair-alley-studio-rewards";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		9572F31E285D173B00D66E44 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "hair-alley-studio-rewards/hair_alley_studio_rewards.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"hair-alley-studio-rewards/Preview Content\"";
+				DEVELOPMENT_TEAM = 86HGZBA3AA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hair-alley-studio-rewards";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9572F303285D173900D66E44 /* Build configuration list for PBXProject "hair-alley-studio-rewards" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9572F31A285D173B00D66E44 /* Debug */,
+				9572F31B285D173B00D66E44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9572F31C285D173B00D66E44 /* Build configuration list for PBXNativeTarget "hair-alley-studio-rewards" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9572F31D285D173B00D66E44 /* Debug */,
+				9572F31E285D173B00D66E44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9572F316285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9572F317285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodel */,
+			);
+			currentVersion = 9572F317285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodel */;
+			path = hair_alley_studio_rewards.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 9572F300285D173900D66E44 /* Project object */;
+}
