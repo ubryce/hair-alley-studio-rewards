@@ -11,14 +11,20 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State private var isPresented: Bool = false
-    @State private var isFindPresented: Bool = false
+    @State private var isEditPresented: Bool = false
     @State private var query = ""
+    @State private var sheetContent: SheetContent = .add
+    @State private var showSheet = false
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         //predicate: NSPredicate(format: "name == %@", "bryce"),
         animation: .default)
     private var items: FetchedResults<Item>
+    
+    enum SheetContent {
+        case add, edit
+    }
 
     var body: some View {
         NavigationView {
@@ -27,6 +33,9 @@ struct ContentView: View {
                     NavigationLink {
                         Text("Item at \(item.timestamp!, formatter: itemFormatter)")
                         Text("name \(item.name ?? "")")
+                        Button("edit"){
+                            editItem()
+                        }
                     } label: {
                         Text("name \(item.name ?? "")")
                     }
@@ -41,12 +50,13 @@ struct ContentView: View {
                     TextField("Search for user", text: $query)
                         .textFieldStyle(.roundedBorder)
                 }
-            }.sheet(isPresented: $isPresented, onDismiss: {}) {
-                AddNewListView { newListName, newListNum in
-                    // saving new list
-                }.frame(width: 600, height: 400)
-                    .foregroundColor(.black)
-            }
+            }.sheet(isPresented: $showSheet, content: {
+                switch sheetContent {
+                case .add: AddNewListView { newListName, newListNum in }.frame(width: 600, height: 400)
+                case .edit: EditListView { newListName, newListNum in }.frame(width: 600, height: 400)
+                }
+            })
+            
             Text("Select an item")
         }.searchable(text: $query)
             .onChange(of: query) { newValue in
@@ -59,12 +69,25 @@ struct ContentView: View {
         return NSPredicate(format: "%K BEGINSWITH[cd] %@",
                            #keyPath(Item.name),query)
     }
+    
+    private func editItem() {
+        withAnimation {
+            //let newItem = Item(context: viewContext)
+            //newItem.timestamp = Date()
+            isEditPresented = true
+            sheetContent = .edit
+            showSheet = true
+        }
+    }
+
 
     private func addItem() {
         withAnimation {
             //let newItem = Item(context: viewContext)
             //newItem.timestamp = Date()
             isPresented = true
+            sheetContent = .add
+            showSheet = true
         }
     }
 
