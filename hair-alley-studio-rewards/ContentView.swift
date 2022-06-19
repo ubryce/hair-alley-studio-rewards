@@ -34,7 +34,28 @@ struct ContentView: View {
                         Text("Item at \(item.timestamp!, formatter: itemFormatter)")
                         Text("name \(item.name ?? "")")
                         Button("edit"){
-                            editItem()
+                            //editItem()
+                            item.name = "xyloedited"
+                            do {
+                                try viewContext.save()
+                            } catch {
+                                // Replace this implementation with code to handle the error appropriately.
+                                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                let nsError = error as NSError
+                                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                            }
+                        }
+                        Button("delete"){
+                            //editItem()
+                            viewContext.delete(item)
+                            do {
+                                try viewContext.save()
+                            } catch {
+                                // Replace this implementation with code to handle the error appropriately.
+                                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                let nsError = error as NSError
+                                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                            }
                         }
                     } label: {
                         Text("name \(item.name ?? "")")
