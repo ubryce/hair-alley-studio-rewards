@@ -35,28 +35,30 @@ struct ContentView: View {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Name: \(item.name ?? "")")
-                        TextField("New Client Name", text: $newListName)
-                            .textFieldStyle(.roundedBorder)
-                            .padding()
-                        Text("Phone: \(item.phone ?? "")")
-                        TextField("New Client Phone", text: $newListPhone)
-                            .textFieldStyle(.roundedBorder)
-                            .padding()
-                        Text("Rewards: \(item.numOfCuts )")
-                            .onAppear{
-                                newListNum = Int(item.numOfCuts)
-                            }
-                        HStack {
-                            if ( newListNum == 0 ) {
-                                Button("-"){
-                                    newListNum = newListNum - 1
-                                }.disabled(newListNum == 0)
-                                
-                            }
-                            if ( newListNum != 0 ) {
-                                Button("-"){
-                                    newListNum = newListNum - 1
+                        VStack {
+                            HStack(alignment: .top){
+                                VStack (alignment:.leading){
+                                    Text(item.name ?? "")
+                                        .font(.system(size: 30).bold())
+                                    HStack{
+                                        Text(item.phone ?? "")
+                                        Text("Rewards: \(item.numOfCuts )")
+                                            .onAppear{
+                                                newListNum = Int(item.numOfCuts)
+                                            }
+                                    }
+                                }.padding(.leading, 75)
+                                Spacer()
+                                Button("Delete Client"){
+                                    viewContext.delete(item)
+                                    do {
+                                        try viewContext.save()
+                                    } catch {
+                                        // Replace this implementation with code to handle the error appropriately.
+                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                        let nsError = error as NSError
+                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                    }
                                 }.onHover { isHovered in
                                     hover = isHovered
                                     DispatchQueue.main.async { //<-- Here
@@ -66,181 +68,209 @@ struct ContentView: View {
                                             NSCursor.pop()
                                         }
                                     }
+                                }.padding(.trailing, 75)
+                            }.padding(.top,65)
+                            
+                            Spacer()
+                            
+                            HStack{
+                                VStack(alignment: .leading) {
+                                    Text("Edit Client").font(.system(size: 20))
+                                    TextField("New Name", text: $newListName)
+                                        .textFieldStyle(.roundedBorder)
+                                    TextField("New Phone", text: $newListPhone)
+                                        .textFieldStyle(.roundedBorder)
+                                }.padding(.leading, 75)
+                                    .padding(.trailing, 75)
+                                Spacer()
+                                if( item.numOfCuts == 7) {
+                                    Text("Free Haircut").font(.system(size: 25).bold())
+                                        .padding(.trailing, 75)
                                 }
                             }
-                            Text("Rewards: \(newListNum)")
-                            if ( newListNum == 7 ) {
-                                Button("Free"){
-                                    newListNum = 0
+                            
+                            Spacer()
+                            
+                            HStack {
+                                if ( newListNum == 0 ) {
+                                    Button("-"){
+                                        newListNum = newListNum - 1
+                                    }.disabled(newListNum == 0)
+                                    
                                 }
+                                if ( newListNum != 0 ) {
+                                    Button("-"){
+                                        newListNum = newListNum - 1
+                                    }.onHover { isHovered in
+                                        hover = isHovered
+                                        DispatchQueue.main.async { //<-- Here
+                                            if (hover) {
+                                                NSCursor.pointingHand.push()
+                                            } else {
+                                                NSCursor.pop()
+                                            }
+                                        }
+                                    }
+                                }
+                                Text("Rewards: \(newListNum)")
+                                if ( newListNum == 7 ) {
+                                    Button("Free"){
+                                        newListNum = 0
+                                    }
+                                    .onHover { isHovered in
+                                        hover = isHovered
+                                        DispatchQueue.main.async { //<-- Here
+                                            if (hover) {
+                                                NSCursor.pointingHand.push()
+                                            } else {
+                                                NSCursor.pop()
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    
+                                    Button("+"){
+                                        newListNum = newListNum + 1
+                                    }.onHover { isHovered in
+                                        hover = isHovered
+                                        DispatchQueue.main.async { //<-- Here
+                                            if (hover) {
+                                                NSCursor.pointingHand.push()
+                                            } else {
+                                                NSCursor.pop()
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            
+                            Button("Confirm Edit"){
+                                //editItem()
+                                if ( newListName == "" && newListPhone == "" ) {
+                                    if ( item.numOfCuts == newListNum ) {
+                                        do {
+                                            try viewContext.save()
+                                        } catch {
+                                            // Replace this implementation with code to handle the error appropriately.
+                                            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                            let nsError = error as NSError
+                                            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                        }
+                                    } else {
+                                        item.numOfCuts = Int64(newListNum)
+                                        do {
+                                            try viewContext.save()
+                                        } catch {
+                                            // Replace this implementation with code to handle the error appropriately.
+                                            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                            let nsError = error as NSError
+                                            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                        }
+                                    }
+                                }
+                                if ( newListName != "" && newListPhone != "" ) {
+                                    
+                                    if ( item.numOfCuts == newListNum ) {
+                                        item.name = newListName
+                                        newListName = ""
+                                        item.phone = newListPhone
+                                        newListPhone = ""
+                                        do {
+                                            try viewContext.save()
+                                        } catch {
+                                            // Replace this implementation with code to handle the error appropriately.
+                                            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                            let nsError = error as NSError
+                                            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                        }
+                                    } else {
+                                        item.numOfCuts = Int64(newListNum)
+                                        item.name = newListName
+                                        newListName = ""
+                                        item.phone = newListPhone
+                                        newListPhone = ""
+                                        do {
+                                            try viewContext.save()
+                                        } catch {
+                                            // Replace this implementation with code to handle the error appropriately.
+                                            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                            let nsError = error as NSError
+                                            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                        }
+                                    }
+                                }
+                                if ( newListName != "" && newListPhone == "" ) {
+                                    
+                                    if ( item.numOfCuts == newListNum ) {
+                                        item.name = newListName
+                                        newListName = ""
+                                        do {
+                                            try viewContext.save()
+                                        } catch {
+                                            // Replace this implementation with code to handle the error appropriately.
+                                            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                            let nsError = error as NSError
+                                            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                        }
+                                    } else {
+                                        item.numOfCuts = Int64(newListNum)
+                                        item.name = newListName
+                                        newListName = ""
+                                        do {
+                                            try viewContext.save()
+                                        } catch {
+                                            // Replace this implementation with code to handle the error appropriately.
+                                            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                            let nsError = error as NSError
+                                            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                        }
+                                    }
+                                }
+                                if ( newListName == "" && newListPhone != "" ) {
+                                    
+                                    if ( item.numOfCuts == newListNum ) {
+                                        item.phone = newListPhone
+                                        newListPhone = ""
+                                        do {
+                                            try viewContext.save()
+                                        } catch {
+                                            // Replace this implementation with code to handle the error appropriately.
+                                            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                            let nsError = error as NSError
+                                            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                        }
+                                    } else {
+                                        item.numOfCuts = Int64(newListNum)
+                                        item.phone = newListPhone
+                                        newListPhone = ""
+                                        do {
+                                            try viewContext.save()
+                                        } catch {
+                                            // Replace this implementation with code to handle the error appropriately.
+                                            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                            let nsError = error as NSError
+                                            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                        }
+                                    }
+                                }
+                            }.disabled(newListName.isEmpty && newListNum == item.numOfCuts && newListPhone.isEmpty )
                                 .onHover { isHovered in
                                     hover = isHovered
                                     DispatchQueue.main.async { //<-- Here
-                                        if (hover) {
+                                        if (hover && newListNum != item.numOfCuts || hover && !newListName.isEmpty || hover && !newListPhone.isEmpty) {
                                             NSCursor.pointingHand.push()
                                         } else {
                                             NSCursor.pop()
                                         }
                                     }
                                 }
-                            } else {
-                                Button("+"){
-                                    newListNum = newListNum + 1
-                                }.onHover { isHovered in
-                                    hover = isHovered
-                                    DispatchQueue.main.async { //<-- Here
-                                        if (hover) {
-                                            NSCursor.pointingHand.push()
-                                        } else {
-                                            NSCursor.pop()
-                                        }
-                                    }
-                                }
-                            }
+                                .padding(.bottom, 75)
+                            
                         }
                         
-                        Button("Confirm Edit"){
-                            //editItem()
-                            if ( newListName == "" && newListPhone == "" ) {
-                                if ( item.numOfCuts == newListNum ) {
-                                    do {
-                                        try viewContext.save()
-                                    } catch {
-                                        // Replace this implementation with code to handle the error appropriately.
-                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                                        let nsError = error as NSError
-                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                                    }
-                                } else {
-                                    item.numOfCuts = Int64(newListNum)
-                                    do {
-                                        try viewContext.save()
-                                    } catch {
-                                        // Replace this implementation with code to handle the error appropriately.
-                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                                        let nsError = error as NSError
-                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                                    }
-                                }
-                            }
-                            if ( newListName != "" && newListPhone != "" ) {
-                                
-                                if ( item.numOfCuts == newListNum ) {
-                                    item.name = newListName
-                                    newListName = ""
-                                    item.phone = newListPhone
-                                    newListPhone = ""
-                                    do {
-                                        try viewContext.save()
-                                    } catch {
-                                        // Replace this implementation with code to handle the error appropriately.
-                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                                        let nsError = error as NSError
-                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                                    }
-                                } else {
-                                    item.numOfCuts = Int64(newListNum)
-                                    item.name = newListName
-                                    newListName = ""
-                                    item.phone = newListPhone
-                                    newListPhone = ""
-                                    do {
-                                        try viewContext.save()
-                                    } catch {
-                                        // Replace this implementation with code to handle the error appropriately.
-                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                                        let nsError = error as NSError
-                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                                    }
-                                }
-                            }
-                            if ( newListName != "" && newListPhone == "" ) {
-                                
-                                if ( item.numOfCuts == newListNum ) {
-                                    item.name = newListName
-                                    newListName = ""
-                                    do {
-                                        try viewContext.save()
-                                    } catch {
-                                        // Replace this implementation with code to handle the error appropriately.
-                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                                        let nsError = error as NSError
-                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                                    }
-                                } else {
-                                    item.numOfCuts = Int64(newListNum)
-                                    item.name = newListName
-                                    newListName = ""
-                                    do {
-                                        try viewContext.save()
-                                    } catch {
-                                        // Replace this implementation with code to handle the error appropriately.
-                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                                        let nsError = error as NSError
-                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                                    }
-                                }
-                            }
-                            if ( newListName == "" && newListPhone != "" ) {
-                                
-                                if ( item.numOfCuts == newListNum ) {
-                                    item.phone = newListPhone
-                                    newListPhone = ""
-                                    do {
-                                        try viewContext.save()
-                                    } catch {
-                                        // Replace this implementation with code to handle the error appropriately.
-                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                                        let nsError = error as NSError
-                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                                    }
-                                } else {
-                                    item.numOfCuts = Int64(newListNum)
-                                    item.phone = newListPhone
-                                    newListPhone = ""
-                                    do {
-                                        try viewContext.save()
-                                    } catch {
-                                        // Replace this implementation with code to handle the error appropriately.
-                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                                        let nsError = error as NSError
-                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                                    }
-                                }
-                            }
-                        }.disabled(newListName.isEmpty && newListNum == item.numOfCuts && newListPhone.isEmpty )
-                            .onHover { isHovered in
-                                hover = isHovered
-                                DispatchQueue.main.async { //<-- Here
-                                    if (hover && newListNum != item.numOfCuts || hover && !newListName.isEmpty || hover && !newListPhone.isEmpty) {
-                                        NSCursor.pointingHand.push()
-                                    } else {
-                                        NSCursor.pop()
-                                    }
-                                }
-                            }
-                        Button("delete"){
-                            viewContext.delete(item)
-                            do {
-                                try viewContext.save()
-                            } catch {
-                                // Replace this implementation with code to handle the error appropriately.
-                                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                                let nsError = error as NSError
-                                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                            }
-                        }.onHover { isHovered in
-                            hover = isHovered
-                            DispatchQueue.main.async { //<-- Here
-                                if (hover) {
-                                    NSCursor.pointingHand.push()
-                                } else {
-                                    NSCursor.pop()
-                                }
-                            }
-                        }
                     } label: {
-                        Text(item.name ?? "")
+                        Text(item.name ?? "").padding(.leading, 10)
                     }
                     .onHover { isHovered in
                         hover = isHovered
@@ -253,7 +283,7 @@ struct ContentView: View {
                         }
                     }
                 }
-            }.onDeleteCommand(perform: {print("delete")})
+            }
             .toolbar {
                 ToolbarItemGroup {
                     Button(action: addItem) {
@@ -272,7 +302,7 @@ struct ContentView: View {
         }.searchable(text: $query)
             .onChange(of: query) { newValue in
                 items.nsPredicate = searchPredicate(query: newValue)
-            }
+            }.frame(minWidth: 900, minHeight: 500)
     }
     
     private func searchPredicate(query: String) -> NSPredicate? {

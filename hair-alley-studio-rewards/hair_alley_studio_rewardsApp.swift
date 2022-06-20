@@ -17,3 +17,5 @@ struct hair_alley_studio_rewardsApp: App {
         }
     }
 }
+
+
