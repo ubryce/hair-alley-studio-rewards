@@ -52,7 +52,7 @@ struct AddNewListView: View {
             }
             
             VStack {
-                TextField("List Name", text: $newListName)
+                TextField("Client Name", text: $newListName)
                     .textFieldStyle(.roundedBorder)
                     .padding()
                 TextField("Number of Rewards", value: $newListNum, format: .number)

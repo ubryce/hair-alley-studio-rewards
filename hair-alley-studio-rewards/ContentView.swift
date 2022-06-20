@@ -15,6 +15,8 @@ struct ContentView: View {
     @State private var query = ""
     @State private var sheetContent: SheetContent = .add
     @State private var showSheet = false
+    @State private var newListName = ""
+    @State private var newListNum = ""
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
@@ -31,11 +33,15 @@ struct ContentView: View {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                        Text("name \(item.name ?? "")")
-                        Button("edit"){
+                        Text("Name \(item.name ?? "")")
+                        TextField("New Client Name", text: $newListName)
+                            .textFieldStyle(.roundedBorder)
+                            .padding()
+                        
+                        Button("Confirm Edit"){
                             //editItem()
-                            item.name = "xyloedited"
+                            item.name = newListName
+                            newListName = ""
                             do {
                                 try viewContext.save()
                             } catch {
