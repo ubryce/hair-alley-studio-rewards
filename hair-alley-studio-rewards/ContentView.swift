@@ -17,9 +17,10 @@ struct ContentView: View {
     @State private var showSheet = false
     @State private var newListName = ""
     @State private var newListNum = 0
+    @State private var hover: Bool = false
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Item.name, ascending: true)],
         //predicate: NSPredicate(format: "name == %@", "bryce"),
         animation: .default)
     private var items: FetchedResults<Item>
@@ -42,19 +43,53 @@ struct ContentView: View {
                                 newListNum = Int(item.numOfCuts)
                             }
                         HStack {
+                            if ( newListNum == 0 ) {
+                                Button("-"){
+                                    newListNum = newListNum - 1
+                                }.disabled(newListNum == 0)
+                                
+                            }
                             if ( newListNum != 0 ) {
                                 Button("-"){
                                     newListNum = newListNum - 1
+                                }.onHover { isHovered in
+                                    hover = isHovered
+                                    DispatchQueue.main.async { //<-- Here
+                                        if (hover) {
+                                            NSCursor.pointingHand.push()
+                                        } else {
+                                            NSCursor.pop()
+                                        }
+                                    }
                                 }
                             }
                             Text("Rewards: \(newListNum)")
                             if ( newListNum == 7 ) {
-                                Button("+"){
+                                Button("Free"){
                                     newListNum = 0
+                                }
+                                .onHover { isHovered in
+                                    hover = isHovered
+                                    DispatchQueue.main.async { //<-- Here
+                                        if (hover) {
+                                            NSCursor.pointingHand.push()
+                                        } else {
+                                            NSCursor.pop()
+                                        }
+                                    }
                                 }
                             } else {
                                 Button("+"){
                                     newListNum = newListNum + 1
+                                }.onHover { isHovered in
+                                    hover = isHovered
+                                    DispatchQueue.main.async { //<-- Here
+                                        if (hover) {
+                                            NSCursor.pointingHand.push()
+                                        } else {
+                                            NSCursor.pop()
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -110,7 +145,17 @@ struct ContentView: View {
                                     }
                                 }
                             }
-                        }
+                        }.disabled(newListName.isEmpty && newListNum == item.numOfCuts)
+                            .onHover { isHovered in
+                                hover = isHovered
+                                DispatchQueue.main.async { //<-- Here
+                                    if (hover && newListNum != item.numOfCuts || hover && !newListName.isEmpty) {
+                                        NSCursor.pointingHand.push()
+                                    } else {
+                                        NSCursor.pop()
+                                    }
+                                }
+                            }
                         Button("delete"){
                             //editItem()
                             viewContext.delete(item)
@@ -122,12 +167,30 @@ struct ContentView: View {
                                 let nsError = error as NSError
                                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
                             }
+                        }.onHover { isHovered in
+                            hover = isHovered
+                            DispatchQueue.main.async { //<-- Here
+                                if (hover) {
+                                    NSCursor.pointingHand.push()
+                                } else {
+                                    NSCursor.pop()
+                                }
+                            }
                         }
                     } label: {
                         Text(item.name ?? "")
                     }
+                    .onHover { isHovered in
+                        hover = isHovered
+                        DispatchQueue.main.async { //<-- Here
+                            if (hover) {
+                                NSCursor.pointingHand.push()
+                            } else {
+                                NSCursor.pop()
+                            }
+                        }
+                    }
                 }
-                .onDelete(perform: deleteItems)
             }.onDeleteCommand(perform: {print("delete")})
             .toolbar {
                 ToolbarItemGroup {
