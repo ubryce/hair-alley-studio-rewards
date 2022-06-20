@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var sheetContent: SheetContent = .add
     @State private var showSheet = false
     @State private var newListName = ""
+    @State private var newListPhone = ""
     @State private var newListNum = 0
     @State private var hover: Bool = false
 
@@ -39,6 +40,9 @@ struct ContentView: View {
                             .textFieldStyle(.roundedBorder)
                             .padding()
                         Text("Phone: \(item.phone ?? "")")
+                        TextField("New Client Phone", text: $newListPhone)
+                            .textFieldStyle(.roundedBorder)
+                            .padding()
                         Text("Rewards: \(item.numOfCuts )")
                             .onAppear{
                                 newListNum = Int(item.numOfCuts)
@@ -97,7 +101,7 @@ struct ContentView: View {
                         
                         Button("Confirm Edit"){
                             //editItem()
-                            if ( newListName == "") {
+                            if ( newListName == "" && newListPhone == "" ) {
                                 if ( item.numOfCuts == newListNum ) {
                                     do {
                                         try viewContext.save()
@@ -119,7 +123,38 @@ struct ContentView: View {
                                     }
                                 }
                             }
-                            else {
+                            if ( newListName != "" && newListPhone != "" ) {
+                                
+                                if ( item.numOfCuts == newListNum ) {
+                                    item.name = newListName
+                                    newListName = ""
+                                    item.phone = newListPhone
+                                    newListPhone = ""
+                                    do {
+                                        try viewContext.save()
+                                    } catch {
+                                        // Replace this implementation with code to handle the error appropriately.
+                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                        let nsError = error as NSError
+                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                    }
+                                } else {
+                                    item.numOfCuts = Int64(newListNum)
+                                    item.name = newListName
+                                    newListName = ""
+                                    item.phone = newListPhone
+                                    newListPhone = ""
+                                    do {
+                                        try viewContext.save()
+                                    } catch {
+                                        // Replace this implementation with code to handle the error appropriately.
+                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                        let nsError = error as NSError
+                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                    }
+                                }
+                            }
+                            if ( newListName != "" && newListPhone == "" ) {
                                 
                                 if ( item.numOfCuts == newListNum ) {
                                     item.name = newListName
@@ -146,11 +181,38 @@ struct ContentView: View {
                                     }
                                 }
                             }
-                        }.disabled(newListName.isEmpty && newListNum == item.numOfCuts)
+                            if ( newListName == "" && newListPhone != "" ) {
+                                
+                                if ( item.numOfCuts == newListNum ) {
+                                    item.phone = newListPhone
+                                    newListPhone = ""
+                                    do {
+                                        try viewContext.save()
+                                    } catch {
+                                        // Replace this implementation with code to handle the error appropriately.
+                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                        let nsError = error as NSError
+                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                    }
+                                } else {
+                                    item.numOfCuts = Int64(newListNum)
+                                    item.phone = newListPhone
+                                    newListPhone = ""
+                                    do {
+                                        try viewContext.save()
+                                    } catch {
+                                        // Replace this implementation with code to handle the error appropriately.
+                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                        let nsError = error as NSError
+                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                    }
+                                }
+                            }
+                        }.disabled(newListName.isEmpty && newListNum == item.numOfCuts && newListPhone.isEmpty )
                             .onHover { isHovered in
                                 hover = isHovered
                                 DispatchQueue.main.async { //<-- Here
-                                    if (hover && newListNum != item.numOfCuts || hover && !newListName.isEmpty) {
+                                    if (hover && newListNum != item.numOfCuts || hover && !newListName.isEmpty || hover && !newListPhone.isEmpty) {
                                         NSCursor.pointingHand.push()
                                     } else {
                                         NSCursor.pop()
