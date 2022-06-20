@@ -68,8 +68,7 @@ struct ContentView: View {
                     Button(action: addItem) {
                         Label("Add Item", systemImage: "plus")
                     }
-                    TextField("Search for user", text: $query)
-                        .textFieldStyle(.roundedBorder)
+                    
                 }
             }.sheet(isPresented: $showSheet, content: {
                 switch sheetContent {
