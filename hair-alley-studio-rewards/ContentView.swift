@@ -42,43 +42,72 @@ struct ContentView: View {
                                 newListNum = Int(item.numOfCuts)
                             }
                         HStack {
-                            
-                            Button("-"){
-                                newListNum = newListNum - 1
+                            if ( newListNum != 0 ) {
+                                Button("-"){
+                                    newListNum = newListNum - 1
+                                }
                             }
                             Text("Rewards: \(newListNum)")
-                            Button("+"){
-                                newListNum = newListNum + 1
+                            if ( newListNum == 7 ) {
+                                Button("+"){
+                                    newListNum = 0
+                                }
+                            } else {
+                                Button("+"){
+                                    newListNum = newListNum + 1
+                                }
                             }
-                            
                         }
                         
                         Button("Confirm Edit"){
                             //editItem()
                             if ( newListName == "") {
-                                
-                                item.numOfCuts = Int64(newListNum)
-                                newListNum = 0
-                                do {
-                                    try viewContext.save()
-                                } catch {
-                                    // Replace this implementation with code to handle the error appropriately.
-                                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                                    let nsError = error as NSError
-                                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                if ( item.numOfCuts == newListNum ) {
+                                    do {
+                                        try viewContext.save()
+                                    } catch {
+                                        // Replace this implementation with code to handle the error appropriately.
+                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                        let nsError = error as NSError
+                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                    }
+                                } else {
+                                    item.numOfCuts = Int64(newListNum)
+                                    do {
+                                        try viewContext.save()
+                                    } catch {
+                                        // Replace this implementation with code to handle the error appropriately.
+                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                        let nsError = error as NSError
+                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                    }
                                 }
                             }
                             else {
-                                item.name = newListName
-                                newListName = ""
                                 
-                                do {
-                                    try viewContext.save()
-                                } catch {
-                                    // Replace this implementation with code to handle the error appropriately.
-                                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                                    let nsError = error as NSError
-                                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                if ( item.numOfCuts == newListNum ) {
+                                    item.name = newListName
+                                    newListName = ""
+                                    do {
+                                        try viewContext.save()
+                                    } catch {
+                                        // Replace this implementation with code to handle the error appropriately.
+                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                        let nsError = error as NSError
+                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                    }
+                                } else {
+                                    item.numOfCuts = Int64(newListNum)
+                                    item.name = newListName
+                                    newListName = ""
+                                    do {
+                                        try viewContext.save()
+                                    } catch {
+                                        // Replace this implementation with code to handle the error appropriately.
+                                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                        let nsError = error as NSError
+                                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                    }
                                 }
                             }
                         }
