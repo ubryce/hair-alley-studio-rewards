@@ -16,7 +16,7 @@ struct ContentView: View {
     @State private var sheetContent: SheetContent = .add
     @State private var showSheet = false
     @State private var newListName = ""
-    @State private var newListNum = ""
+    @State private var newListNum = 0
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
@@ -33,22 +33,53 @@ struct ContentView: View {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Name \(item.name ?? "")")
+                        Text("Name: \(item.name ?? "")")
                         TextField("New Client Name", text: $newListName)
                             .textFieldStyle(.roundedBorder)
                             .padding()
+                        Text("Rewards: \(item.numOfCuts )")
+                            .onAppear{
+                                newListNum = Int(item.numOfCuts)
+                            }
+                        HStack {
+                            
+                            Button("-"){
+                                newListNum = newListNum - 1
+                            }
+                            Text("Rewards: \(newListNum)")
+                            Button("+"){
+                                newListNum = newListNum + 1
+                            }
+                            
+                        }
                         
                         Button("Confirm Edit"){
                             //editItem()
-                            item.name = newListName
-                            newListName = ""
-                            do {
-                                try viewContext.save()
-                            } catch {
-                                // Replace this implementation with code to handle the error appropriately.
-                                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                                let nsError = error as NSError
-                                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                            if ( newListName == "") {
+                                
+                                item.numOfCuts = Int64(newListNum)
+                                newListNum = 0
+                                do {
+                                    try viewContext.save()
+                                } catch {
+                                    // Replace this implementation with code to handle the error appropriately.
+                                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                    let nsError = error as NSError
+                                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                }
+                            }
+                            else {
+                                item.name = newListName
+                                newListName = ""
+                                
+                                do {
+                                    try viewContext.save()
+                                } catch {
+                                    // Replace this implementation with code to handle the error appropriately.
+                                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                                    let nsError = error as NSError
+                                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                                }
                             }
                         }
                         Button("delete"){
@@ -64,7 +95,7 @@ struct ContentView: View {
                             }
                         }
                     } label: {
-                        Text("name \(item.name ?? "")")
+                        Text(item.name ?? "")
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -94,6 +125,10 @@ struct ContentView: View {
         if query.isEmpty {return nil}
         return NSPredicate(format: "%K BEGINSWITH[cd] %@",
                            #keyPath(Item.name),query)
+    }
+    
+    private func itemChange() {
+        print("ran")
     }
     
     private func editItem() {
