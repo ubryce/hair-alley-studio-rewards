@@ -21,6 +21,7 @@ struct AddNewListView: View {
     @Environment(\.presentationMode) var presentationMode
     // Create new variables to submit
     @State private var newListName: String = ""
+    @State private var newListPhone: String = ""
     @State private var newListNum: Int64 = 0
     
     var onSave: (String, Int64) -> Void
@@ -37,6 +38,7 @@ struct AddNewListView: View {
                     let newItem = Item(context: viewContext)
                     newItem.timestamp = Date()
                     newItem.name = newListName
+                    newItem.phone = newListPhone
                     newItem.numOfCuts = newListNum
                     presentationMode.wrappedValue.dismiss()
                     do {
@@ -53,6 +55,9 @@ struct AddNewListView: View {
             
             VStack {
                 TextField("Client Name", text: $newListName)
+                    .textFieldStyle(.roundedBorder)
+                    .padding()
+                TextField("Client Phone Number", text: $newListPhone)
                     .textFieldStyle(.roundedBorder)
                     .padding()
                 TextField("Number of Rewards", value: $newListNum, format: .number)

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 @main
 struct hair_alley_studio_rewardsApp: App {
     let persistenceController = PersistenceController.shared

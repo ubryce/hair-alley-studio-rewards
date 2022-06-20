@@ -32,12 +32,8 @@ struct EditListView: View {
                 Button("Cancel") {
                     presentationMode.wrappedValue.dismiss()
                 }.frame(maxWidth: .infinity, alignment: .leading)
-                Button("Done") {
-                    // onsave
-                    let newItem = Item(context: viewContext)
-                    newItem.timestamp = Date()
-                    newItem.name = newListName
-                    newItem.numOfCuts = newListNum
+                Button("Delete") {
+                    
                     presentationMode.wrappedValue.dismiss()
                     do {
                         try viewContext.save()
@@ -47,20 +43,9 @@ struct EditListView: View {
                         let nsError = error as NSError
                         fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
                     }
-                }.disabled(newListName.isEmpty)
+                }
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
-            
-            VStack {
-                TextField("List Name", text: $newListName)
-                    .textFieldStyle(.roundedBorder)
-                    .padding()
-                TextField("Number of Rewards", value: $newListNum, format: .number)
-                    .textFieldStyle(.roundedBorder)
-                    .padding()
-            }
-            .frame(height: 200)
-            .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
             
             Spacer()
             

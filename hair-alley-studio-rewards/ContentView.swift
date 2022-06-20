@@ -38,6 +38,7 @@ struct ContentView: View {
                         TextField("New Client Name", text: $newListName)
                             .textFieldStyle(.roundedBorder)
                             .padding()
+                        Text("Phone: \(item.phone ?? "")")
                         Text("Rewards: \(item.numOfCuts )")
                             .onAppear{
                                 newListNum = Int(item.numOfCuts)
@@ -157,7 +158,6 @@ struct ContentView: View {
                                 }
                             }
                         Button("delete"){
-                            //editItem()
                             viewContext.delete(item)
                             do {
                                 try viewContext.save()
@@ -206,7 +206,7 @@ struct ContentView: View {
                 }
             })
             
-            Text("Select an item")
+            Text("Select a Client")
         }.searchable(text: $query)
             .onChange(of: query) { newValue in
                 items.nsPredicate = searchPredicate(query: newValue)
@@ -215,19 +215,18 @@ struct ContentView: View {
     
     private func searchPredicate(query: String) -> NSPredicate? {
         if query.isEmpty {return nil}
-        return NSPredicate(format: "%K BEGINSWITH[cd] %@",
-                           #keyPath(Item.name),query)
+        return NSPredicate(format: "%K BEGINSWITH[cd] %@ OR %K BEGINSWITH[cd] %@",
+                        #keyPath(Item.name),query, #keyPath(Item.phone), query)
     }
     
-    private func itemChange() {
-        print("ran")
+    private func deleteItem() -> String {
+        return "yes"
     }
     
     private func editItem() {
         withAnimation {
             //let newItem = Item(context: viewContext)
             //newItem.timestamp = Date()
-            isEditPresented = true
             sheetContent = .edit
             showSheet = true
         }
