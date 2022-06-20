@@ -302,7 +302,7 @@ struct ContentView: View {
         }.searchable(text: $query)
             .onChange(of: query) { newValue in
                 items.nsPredicate = searchPredicate(query: newValue)
-            }.frame(minWidth: 900, minHeight: 500)
+            }.frame(width: 900, height: 500)
     }
     
     private func searchPredicate(query: String) -> NSPredicate? {
