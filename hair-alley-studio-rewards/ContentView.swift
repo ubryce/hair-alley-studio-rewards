@@ -33,6 +33,16 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
+                Button {
+                    isPresented = true
+                    addItem()
+                } label: {
+                    HStack {
+                        Image(systemName: "plus.circle")
+                        Text("Add")
+                    }
+                }.buttonStyle(.plain)
+                TextField("Search", text: $query).textFieldStyle(.roundedBorder)
                 ForEach(items) { item in
                     NavigationLink {
                         VStack {
@@ -266,7 +276,7 @@ struct ContentView: View {
                                     }
                                 }
                                 .padding(.bottom, 75)
-                            
+        
                         }
                         
                     } label: {
