@@ -23,6 +23,7 @@ struct AddNewListView: View {
     @State private var newListName: String = ""
     @State private var newListPhone: String = ""
     @State private var newListNum: Int64 = 0
+    @State private var hover: Bool = false
     
     var onSave: (String, Int64) -> Void
     
@@ -32,6 +33,15 @@ struct AddNewListView: View {
             HStack {
                 Button("Cancel") {
                     presentationMode.wrappedValue.dismiss()
+                }.onHover { isHovered in
+                    hover = isHovered
+                    DispatchQueue.main.async { //<-- Here
+                        if (hover) {
+                            NSCursor.pointingHand.push()
+                        } else {
+                            NSCursor.pop()
+                        }
+                    }
                 }.frame(maxWidth: .infinity, alignment: .leading)
                 Button("Done") {
                     // onsave
@@ -50,6 +60,16 @@ struct AddNewListView: View {
                         fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
                     }
                 }.disabled(newListName.isEmpty)
+                    .onHover { isHovered in
+                        hover = isHovered
+                        DispatchQueue.main.async { //<-- Here
+                            if (hover && !newListName.isEmpty) {
+                                NSCursor.pointingHand.push()
+                            } else {
+                                NSCursor.pop()
+                            }
+                        }
+                    }
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
             
