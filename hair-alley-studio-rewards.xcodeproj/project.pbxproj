@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9572F308285D173900D66E44 /* hair-alley-studio-rewards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hair-alley-studio-rewards.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9572F308285D173900D66E44 /* Alley Studio Rewards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alley Studio Rewards.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9572F30B285D173900D66E44 /* hair_alley_studio_rewardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hair_alley_studio_rewardsApp.swift; sourceTree = "<group>"; };
 		9572F30D285D173900D66E44 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9572F30F285D173B00D66E44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 		9572F309285D173900D66E44 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9572F308285D173900D66E44 /* hair-alley-studio-rewards.app */,
+				9572F308285D173900D66E44 /* Alley Studio Rewards.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,7 +98,7 @@
 			);
 			name = "hair-alley-studio-rewards";
 			productName = "hair-alley-studio-rewards";
-			productReference = 9572F308285D173900D66E44 /* hair-alley-studio-rewards.app */;
+			productReference = 9572F308285D173900D66E44 /* Alley Studio Rewards.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -297,7 +297,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hair-alley-studio-rewards";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Alley Studio Rewards";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -324,7 +324,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hair-alley-studio-rewards";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Alley Studio Rewards";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};

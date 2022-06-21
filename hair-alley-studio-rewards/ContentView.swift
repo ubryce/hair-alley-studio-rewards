@@ -303,8 +303,8 @@ struct ContentView: View {
                 }
             }.sheet(isPresented: $showSheet, content: {
                 switch sheetContent {
-                case .add: AddNewListView { newListName, newListNum in }.frame(width: 600, height: 400)
-                case .edit: EditListView { newListName, newListNum in }.frame(width: 600, height: 400)
+                case .add: AddNewListView { newListName, newListNum in }.frame(width: 350, height: 300)
+                case .edit: EditListView { newListName, newListNum in }.frame(width: 350, height: 300)
                 }
             })
             
@@ -312,7 +312,7 @@ struct ContentView: View {
         }.searchable(text: $query)
             .onChange(of: query) { newValue in
                 items.nsPredicate = searchPredicate(query: newValue)
-            }.frame(width: 900, height: 500)
+            }.frame(width: 700, height: 350)
     }
     
     private func searchPredicate(query: String) -> NSPredicate? {

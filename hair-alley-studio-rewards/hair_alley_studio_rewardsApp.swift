@@ -26,15 +26,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     
     @MainActor func applicationDidFinishLaunching(_ notification: Notification) {
         
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         
         if let statusButton = statusItem.button {
-            statusButton.image = NSImage(systemSymbolName: "chart.line.uptrend.xyaxis.circle", accessibilityDescription: "Chart Line")
+            //statusButton.image = NSImage(systemSymbolName: "chart.line.uptrend.xyaxis.circle", accessibilityDescription: "Chart Line")
+            statusButton.image = NSImage(named: NSImage.Name("AppIcon"))
+            statusButton.image?.size = NSMakeSize(16,16)
             statusButton.action = #selector(togglePopover)
         }
         
         self.popover = NSPopover()
-        self.popover.contentSize = NSSize(width: 900, height: 500)
+        self.popover.contentSize = NSSize(width: 700, height: 350)
         self.popover.behavior = .transient
         self.popover.contentViewController = NSHostingController(rootView: ContentView().environment(\.managedObjectContext, persistenceController.container.viewContext))
     }
