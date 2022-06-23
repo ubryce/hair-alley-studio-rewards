@@ -15,6 +15,7 @@
 		9572F318285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9572F316285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodeld */; };
 		9572F320285D195C00D66E44 /* AddNewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572F31F285D195C00D66E44 /* AddNewListView.swift */; };
 		9572F324285D379500D66E44 /* EditListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572F323285D379500D66E44 /* EditListView.swift */; };
+		9572F3272863F8BB00D66E44 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9572F3262863F8BB00D66E44 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9572F3272863F8BB00D66E44 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +99,9 @@
 			dependencies = (
 			);
 			name = "hair-alley-studio-rewards";
+			packageProductDependencies = (
+				9572F3262863F8BB00D66E44 /* Alamofire */,
+			);
 			productName = "hair-alley-studio-rewards";
 			productReference = 9572F308285D173900D66E44 /* Alley Studio Rewards.app */;
 			productType = "com.apple.product-type.application";
@@ -125,6 +130,9 @@
 				Base,
 			);
 			mainGroup = 9572F2FF285D173900D66E44;
+			packageReferences = (
+				9572F3252863F8BB00D66E44 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 9572F309285D173900D66E44 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -354,6 +362,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9572F3252863F8BB00D66E44 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9572F3262863F8BB00D66E44 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9572F3252863F8BB00D66E44 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9572F316285D173B00D66E44 /* hair_alley_studio_rewards.xcdatamodeld */ = {

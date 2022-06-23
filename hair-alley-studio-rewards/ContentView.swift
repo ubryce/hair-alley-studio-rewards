@@ -14,11 +14,13 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State private var isPresented: Bool = false
     @State private var isEditPresented: Bool = false
+    @State private var isPlusClicked: Bool = false
     @State private var query = ""
     @State private var sheetContent: SheetContent = .add
     @State private var showSheet = false
     @State private var newListName = ""
     @State private var newListPhone = ""
+    @State private var totalRewards = 0
     @State private var newListNum = 0
     @State private var hover: Bool = false
 
@@ -54,10 +56,13 @@ struct ContentView: View {
                                         .font(.system(size: 30).bold())
                                     HStack{
                                         Text(item.phone ?? "")
-                                        Text("Rewards: \(item.numOfCuts )")
+                                        Text("Rewards: \(item.numOfCuts)")
                                             .onAppear{
                                                 newListNum = Int(item.numOfCuts)
+                                                totalRewards = Int(item.freeHaircuts)
+                                                isPlusClicked = false
                                             }
+                                        Text("Free: \(item.freeHaircuts)")
                                     }
                                 }.padding(.leading, 75)
                                 Spacer()
@@ -95,8 +100,8 @@ struct ContentView: View {
                                 }.padding(.leading, 75)
                                     .padding(.trailing, 75)
                                 Spacer()
-                                if( item.numOfCuts == 7) {
-                                    Text("Free Haircut").font(.system(size: 25).bold())
+                                if( item.numOfCuts == 9) {
+                                    Text("Next Haircut Free").font(.system(size: 25).bold())
                                         .padding(.trailing, 75)
                                 }
                             }
@@ -104,61 +109,27 @@ struct ContentView: View {
                             Spacer()
                             
                             HStack {
-                                if ( newListNum == 0 ) {
-                                    Button("-"){
-                                        newListNum = newListNum - 1
-                                    }.disabled(newListNum == 0)
-                                    
-                                }
-                                if ( newListNum != 0 ) {
-                                    Button("-"){
-                                        newListNum = newListNum - 1
-                                    }.onHover { isHovered in
-                                        hover = isHovered
-                                        DispatchQueue.main.async { //<-- Here
-                                            if (hover) {
-                                                NSCursor.pointingHand.push()
-                                            } else {
-                                                NSCursor.pop()
-                                            }
-                                        }
-                                    }
-                                }
                                 Text("Rewards: \(newListNum)")
-                                if ( newListNum == 7 ) {
-                                    Button("Free"){
-                                        newListNum = 0
-                                    }
-                                    .onHover { isHovered in
-                                        hover = isHovered
-                                        DispatchQueue.main.async { //<-- Here
-                                            if (hover) {
-                                                NSCursor.pointingHand.push()
-                                            } else {
-                                                NSCursor.pop()
-                                            }
+                                    
+                                Button("+"){
+                                    newListNum = newListNum + 1
+                                    isPlusClicked = true
+                                }.onHover { isHovered in
+                                    hover = isHovered
+                                    DispatchQueue.main.async { //<-- Here
+                                        if (hover) {
+                                            NSCursor.pointingHand.push()
+                                        } else {
+                                            NSCursor.pop()
                                         }
                                     }
-                                } else {
+                                }.disabled( isPlusClicked )
                                     
-                                    Button("+"){
-                                        newListNum = newListNum + 1
-                                    }.onHover { isHovered in
-                                        hover = isHovered
-                                        DispatchQueue.main.async { //<-- Here
-                                            if (hover) {
-                                                NSCursor.pointingHand.push()
-                                            } else {
-                                                NSCursor.pop()
-                                            }
-                                        }
-                                    }
-                                    
-                                }
+                                
                             }
                             
                             Button("Confirm Edit"){
-                                //editItem()
+                                isPlusClicked = false
                                 if ( newListName == "" && newListPhone == "" ) {
                                     if ( item.numOfCuts == newListNum ) {
                                         do {
@@ -170,9 +141,16 @@ struct ContentView: View {
                                             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
                                         }
                                     } else {
-                                        item.numOfCuts = Int64(newListNum)
+                                        if( newListNum >= 10 ) {
+                                            item.numOfCuts = Int64(newListNum%10)
+                                            item.freeHaircuts = item.freeHaircuts + 1
+                                        }
+                                        if ( newListNum < 10 ) {
+                                            item.numOfCuts = Int64(newListNum)
+                                        }
                                         do {
                                             try viewContext.save()
+                                            newListNum = Int(item.numOfCuts)
                                         } catch {
                                             // Replace this implementation with code to handle the error appropriately.
                                             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -197,13 +175,20 @@ struct ContentView: View {
                                             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
                                         }
                                     } else {
-                                        item.numOfCuts = Int64(newListNum)
+                                        if( newListNum == 10 ) {
+                                            item.numOfCuts = Int64(newListNum%10)
+                                            item.freeHaircuts = item.freeHaircuts + 1
+                                        }
+                                        if ( newListNum < 10 ) {
+                                            item.numOfCuts = Int64(newListNum)
+                                        }
                                         item.name = newListName
                                         newListName = ""
                                         item.phone = newListPhone
                                         newListPhone = ""
                                         do {
                                             try viewContext.save()
+                                            newListNum = Int(item.numOfCuts)
                                         } catch {
                                             // Replace this implementation with code to handle the error appropriately.
                                             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -226,11 +211,18 @@ struct ContentView: View {
                                             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
                                         }
                                     } else {
-                                        item.numOfCuts = Int64(newListNum)
+                                        if( newListNum == 10 ) {
+                                            item.numOfCuts = Int64(newListNum%10)
+                                            item.freeHaircuts = item.freeHaircuts + 1
+                                        }
+                                        if ( newListNum < 10 ) {
+                                            item.numOfCuts = Int64(newListNum)
+                                        }
                                         item.name = newListName
                                         newListName = ""
                                         do {
                                             try viewContext.save()
+                                            newListNum = Int(item.numOfCuts)
                                         } catch {
                                             // Replace this implementation with code to handle the error appropriately.
                                             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -253,11 +245,18 @@ struct ContentView: View {
                                             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
                                         }
                                     } else {
-                                        item.numOfCuts = Int64(newListNum)
+                                        if( newListNum == 10 ) {
+                                            item.numOfCuts = Int64(newListNum%10)
+                                            item.freeHaircuts = item.freeHaircuts + 1
+                                        }
+                                        if ( newListNum < 10 ) {
+                                            item.numOfCuts = Int64(newListNum)
+                                        }
                                         item.phone = newListPhone
                                         newListPhone = ""
                                         do {
                                             try viewContext.save()
+                                            newListNum = Int(item.numOfCuts)
                                         } catch {
                                             // Replace this implementation with code to handle the error appropriately.
                                             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -294,6 +293,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    
                 }
             }
             .toolbar {
